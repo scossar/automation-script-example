@@ -1,0 +1,8 @@
+en:
+  site_settings:
+    automation_script_example_enabled: "Enabled"
+  discourse_automation:
+    scriptables:
+      user_update_summary_email_options:
+        title: Update a User's Summary Email Preferences
+        description: Enable or disable a user's Summary Email preferences

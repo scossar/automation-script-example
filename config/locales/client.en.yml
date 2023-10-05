@@ -1,0 +1,8 @@
+en:
+  js:
+    discourse_automation:
+      scriptables:
+        user_update_summary_email_options:
+          fields:
+            email_digests:
+              label: Set summary email preference

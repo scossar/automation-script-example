@@ -1,0 +1,4 @@
+plugins:
+  automation_script_example_enabled:
+    default: false
+    client: true
