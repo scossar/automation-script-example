@@ -21,8 +21,8 @@ after_initialize do
         version 1
         triggerables [:user_added_to_group, :user_removed_from_group]
 
-        script do |context, fields|
-          if context["kind"] == "user_added_to_group" || context["kind"] == "user_removed_from_group" && fields.has_key?("email_digests")
+        script do |context, fields, automation|
+          if automation.script == "user_update_summary_email_options" && (context["kind"] == "user_added_to_group" || context["kind"] == "user_removed_from_group")
             user_id = context["user"].id
             digest_option = fields.dig("email_digests", "value")
             user_option = UserOption.find_by(user_id: user_id)
