@@ -28,7 +28,7 @@ after_initialize do
           end
         end
       end
-
+      # Note that the `groups` component doesn't exist in the Automation plugin (yet), so this code doesn't work
       DiscourseAutomation::Triggerable::USER_ADDED_TO_SUBGROUP = "user_added_to_subgroup"
       add_automation_triggerable(DiscourseAutomation::Triggerable::USER_ADDED_TO_SUBGROUP) do
         field :subgroups, component: :groups, required: true
@@ -97,9 +97,6 @@ after_initialize do
         end
       end
 
-    end
-=begin
-    if defined?(DiscourseAutomation)
       DiscourseAutomation::Scriptable::USER_UPDATE_SUMMARY_EMAIL_OPTIONS =
         "user_update_summary_email_options"
       add_automation_scriptable(
@@ -107,29 +104,20 @@ after_initialize do
       ) do
 
         field :email_digests, component: :boolean
-
-        version 1
-        triggerables [:user_added_to_groups, :user_added_to_group]
+        triggerables [:user_added_to_group, :user_removed_from_group]
 
         script do |context, fields, automation|
-          Rails.logger.warn("CONTEXT FROM CUSTOM: #{context}")
-          if context["kind"] == "user_added_to_groups"
+          if automation.script == "user_update_summary_email_options" && (context["kind"] == "user_added_to_group" || context["kind"] == "user_removed_from_group")
             user_id = context["user"].id
             digest_option = fields.dig("email_digests", "value")
             user_option = UserOption.find_by(user_id: user_id)
 
-            Rails.logger.warn("GROUPS TEST: #{context}")
-
             if (user_option)
-              # user_option.update(email_digests: digest_option)
+              user_option.update(email_digests: digest_option)
             end
           end
         end
       end
     end
-=end
-
-
-
   end
 end
