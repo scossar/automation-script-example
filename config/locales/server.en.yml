@@ -6,3 +6,16 @@ en:
       user_update_summary_email_options:
         title: Update a User's Summary Email Preferences
         description: Enable or disable a user's Summary Email preferences
+      add_user_to_parent_group:
+        title: Add user to parent group
+        description: Add user to parent group when added to subgroup
+      remove_user_from_parent_group:
+        title: Remove user from parent group
+        description: Remove user from parent group when removed from subgroup
+    triggerables:
+      user_added_to_subgroup:
+        title: User added to subgroup
+        description: Triggered when a user is added to a subgroup
+      user_removed_from_subgroup:
+        title: User removed from subgroup
+        description: Triggered when a user is removed from a subgroup
